@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - npm install --no-save
+  build:
+    commands:
+      - ./node_modules/.bin/jasmine test/**/*.spec.js
+  post_build:
+    commands:
+      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8 > source_version
+artifacts:
+  type: zip
+  files:
+    - '**/*'
